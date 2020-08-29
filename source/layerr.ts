@@ -1,7 +1,8 @@
 import { assertError, inherit, isError } from "./error";
 import { parseArguments } from "./tools";
+import { LayerrOptions } from "./types";
 
-export function Layerr() {
+export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, messageText?: string) {
     const args = [...arguments];
     if (this instanceof Layerr === false) {
         throw new Error("Cannot invoke 'Layerr' like a function: It must be called with 'new'");
