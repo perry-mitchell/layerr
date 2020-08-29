@@ -1,6 +1,6 @@
 # Layerr Changelog
 
-## v0.1.1
+## v0.1.2
 _2020-08-29_
 
  * **Bugfix**:
