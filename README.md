@@ -3,6 +3,8 @@
 
 A NodeJS and Web `Error` wrapping utility, based heavily on [VError](https://github.com/joyent/node-verror), but without all the extras and dependencies on Node core utilities. Written in Typescript, compiled to JavaScript and suitable for bundling in the browser.
 
+Uses no dependencies, minifies well and is a great way to wrap errors as they propagate through complex applications (such as Express services, for instance).
+
 ## Installation
 
 Install by running: `npm install layerr`.
