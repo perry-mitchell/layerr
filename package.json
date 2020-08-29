@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf ./dist",
+    "dev": "npm run clean && tsc --watch",
     "prepublishOnly": "npm run build",
     "test": "run-s build test:specs",
     "test:specs": "nyc mocha -r test/index.js test/**/*.spec.js"

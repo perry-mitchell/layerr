@@ -1,8 +1,13 @@
 import { assertError, inherit, isError } from "./error";
 import { parseArguments } from "./tools";
-import { LayerrOptions } from "./types";
+import { LayerrInfo, LayerrOptions } from "./types";
 
-export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, messageText?: string) {
+interface Layerr extends Error {
+    _cause?: Error;
+    _info?: LayerrInfo
+}
+
+export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, messageText?: string): void {
     const args = [...arguments];
     if (this instanceof Layerr === false) {
         throw new Error("Cannot invoke 'Layerr' like a function: It must be called with 'new'");
@@ -32,11 +37,11 @@ export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, m
 
 inherit(Layerr, Error);
 
-Layerr.prototype.cause = function _getCause() {
+Layerr.prototype.cause = function _getCause(): Error | Layerr | null {
     return Layerr.cause(this) || undefined;
 };
 
-Layerr.prototype.toString = function _toString() {
+Layerr.prototype.toString = function _toString(): string {
     let output = this.name || this.constructor.name || this.constructor.prototype.name;
     if (this.message) {
         output = `${output}: ${this.message}`;
@@ -45,12 +50,12 @@ Layerr.prototype.toString = function _toString() {
 };
 
 
-Layerr.cause = function __getCause(err: Layerr) {
+Layerr.cause = function __getCause(err: Layerr): Error | Layerr | null {
     assertError(err);
     return isError(err._cause) ? err._cause : null;
 };
 
-Layerr.fullStack = function __getFullStack(err) {
+Layerr.fullStack = function __getFullStack(err: Error | Layerr): string {
     assertError(err);
     const cause = Layerr.cause(err);
     if (cause) {
@@ -59,15 +64,15 @@ Layerr.fullStack = function __getFullStack(err) {
     return err.stack;
 };
 
-Layerr.info = function __getInfo(err) {
+Layerr.info = function __getInfo(err: Error | Layerr): LayerrInfo {
     assertError(err);
     const output = {};
     const cause = Layerr.cause(err);
     if (cause) {
         Object.assign(output, Layerr.info(cause));
     }
-    if (err._info) {
-        Object.assign(output, err._info);
+    if ((<Layerr>err)._info) {
+        Object.assign(output, (<Layerr>err)._info);
     }
     return output;
 };
