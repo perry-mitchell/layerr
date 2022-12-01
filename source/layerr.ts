@@ -5,6 +5,7 @@ import { LayerrInfo, LayerrOptions } from "./types";
 interface Layerr extends Error {
     _cause?: Error;
     _info?: LayerrInfo
+    new (errorOptionsOrMessage?: LayerrOptions | string | Error, messageText?: string): Layerr;
 }
 
 export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, messageText?: string): void {
@@ -13,7 +14,6 @@ export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, m
         throw new Error("Cannot invoke 'Layerr' like a function: It must be called with 'new'");
     }
     const { options, shortMessage } = parseArguments(args);
-    this.name = "Layerr";
     if (options.name && typeof options.name === "string") {
         this.name = options.name;
     }
@@ -35,7 +35,7 @@ export function Layerr(errorOptionsOrMessage?: LayerrOptions | string | Error, m
     return this;
 }
 
-inherit(Layerr, Error);
+inherit(Layerr, Error, "Layerr");
 
 Layerr.prototype.cause = function _getCause(): Error | Layerr | null {
     return Layerr.cause(this) || undefined;
@@ -50,9 +50,10 @@ Layerr.prototype.toString = function _toString(): string {
 };
 
 
-Layerr.cause = function __getCause(err: Layerr): Error | Layerr | null {
+Layerr.cause = function __getCause(err: Layerr | Error): Error | Layerr | null {
     assertError(err);
-    return isError(err._cause) ? err._cause : null;
+    if (!(err as Layerr)._cause) return null;
+    return isError((err as Layerr)._cause) ? (err as Layerr)._cause : null;
 };
 
 Layerr.fullStack = function __getFullStack(err: Error | Layerr): string {

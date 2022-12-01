@@ -8,11 +8,17 @@ export function assertError(err: Error) {
     }
 }
 
-export function inherit(ctor: ExtendedConstructor, superCtor: Function) {
+export function inherit(ctor: ExtendedConstructor, superCtor: Function, name: string): void {
     ctor.super_ = superCtor;
     ctor.prototype = Object.create(superCtor.prototype, {
         constructor: {
             value: ctor,
+            enumerable: false,
+            writable: true,
+            configurable: true
+        },
+        name: {
+            value: name,
             enumerable: false,
             writable: true,
             configurable: true
