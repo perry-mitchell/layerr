@@ -1,6 +1,6 @@
-import { assertError, isError } from "./error";
-import { parseArguments } from "./tools";
-import { LayerrInfo, LayerrOptions } from "./types";
+import { assertError, isError } from "./error.js";
+import { parseArguments } from "./tools.js";
+import { LayerrInfo, LayerrOptions } from "./types.js";
 
 export class Layerr extends Error {
     public _cause?: Error;

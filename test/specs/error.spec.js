@@ -1,5 +1,4 @@
-const { Layerr } = require("../../dist/layerr.js");
-const { assertError, isError } = require("../../dist/error.js");
+const { Layerr, assertError, isError } = require("../../dist/index.js");
 
 describe("assertError", function() {
     it("does not throw for Error instances", function() {

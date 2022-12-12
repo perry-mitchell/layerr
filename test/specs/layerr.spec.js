@@ -1,4 +1,4 @@
-const { Layerr } = require("../../dist/layerr.js");
+const { Layerr } = require("../../dist/index.js");
 
 describe("Layer", function() {
     it("can be instantiated with error", function() {
@@ -10,7 +10,7 @@ describe("Layer", function() {
     it("throws if invoked as a function", function() {
         expect(() => {
             Layerr();
-        }).to.throw(/Class constructor Layerr/i);
+        }).to.throw(/Cannot call a class as a function/i);
     });
 
     describe("instance", function() {
