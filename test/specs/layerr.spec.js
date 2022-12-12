@@ -1,4 +1,4 @@
-const { Layerr } = require("../../dist/layerr.js");
+const { Layerr } = require("../../dist/index.js");
 
 describe("Layer", function() {
     it("can be instantiated with error", function() {
@@ -10,14 +10,14 @@ describe("Layer", function() {
     it("throws if invoked as a function", function() {
         expect(() => {
             Layerr();
-        }).to.throw(/It must be called with 'new'/i);
+        }).to.throw(/Cannot call a class as a function/i);
     });
 
     describe("instance", function() {
         describe("cause", function() {
             it("returns undefined if no parent", function() {
                 const err = new Layerr("");
-                expect(err.cause()).to.be.undefined;
+                expect(err.cause()).to.be.null;
             });
 
             it("returns parent if provided", function() {

@@ -1,5 +1,5 @@
-import { isError } from "./error";
-import { LayerrOptions } from "./types";
+import { isError } from "./error.js";
+import { LayerrOptions } from "./types.js";
 
 export function parseArguments(args: Array<any>): { options: LayerrOptions, shortMessage: string } {
     let options: LayerrOptions,
