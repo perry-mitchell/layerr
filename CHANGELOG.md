@@ -1,5 +1,11 @@
 # Layerr Changelog
 
+## v1.0.0
+_2022-12-12_
+
+ * **Major release**
+   * Class-based `Layerr` instance, compiled to function-style during build
+
 ## v0.1.2
 _2020-08-29_
 
