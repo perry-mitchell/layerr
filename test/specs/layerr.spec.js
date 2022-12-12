@@ -10,14 +10,14 @@ describe("Layer", function() {
     it("throws if invoked as a function", function() {
         expect(() => {
             Layerr();
-        }).to.throw(/It must be called with 'new'/i);
+        }).to.throw(/Class constructor Layerr/i);
     });
 
     describe("instance", function() {
         describe("cause", function() {
             it("returns undefined if no parent", function() {
                 const err = new Layerr("");
-                expect(err.cause()).to.be.undefined;
+                expect(err.cause()).to.be.null;
             });
 
             it("returns parent if provided", function() {

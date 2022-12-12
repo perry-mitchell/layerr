@@ -1,5 +1,5 @@
 const { Layerr } = require("../../dist/layerr.js");
-const { assertError, inherit, isError } = require("../../dist/error.js");
+const { assertError, isError } = require("../../dist/error.js");
 
 describe("assertError", function() {
     it("does not throw for Error instances", function() {
@@ -18,20 +18,6 @@ describe("assertError", function() {
         expect(() => {
             assertError({});
         }).to.throw(/not an error/i);
-    });
-});
-
-describe("inherit", function() {
-    it("correctly configures inheritance", function() {
-        function Parent() {
-            return this;
-        }
-        function Child() {
-            return this;
-        }
-        inherit(Child, Parent);
-        const child = new Child();
-        expect(child).to.be.an.instanceOf(Parent);
     });
 });
 
