@@ -5,6 +5,8 @@ A NodeJS and Web `Error` wrapping utility, based heavily on [VError](https://git
 
 Uses no dependencies, minifies well and is a great way to wrap errors as they propagate through complex applications (such as Express services, for instance).
 
+_Layerr is an ESM library, and as such you need a compatible environment in which to install and use it._
+
 ## Installation
 
 Install by running: `npm install layerr`.
