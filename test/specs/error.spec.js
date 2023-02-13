@@ -1,4 +1,5 @@
-const { Layerr, assertError, isError } = require("../../dist/index.js");
+import { expect } from "chai";
+import { Layerr, assertError, isError } from "../../dist/index.js";
 
 describe("assertError", function() {
     it("does not throw for Error instances", function() {
