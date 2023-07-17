@@ -1,5 +1,10 @@
 # Layerr Changelog
 
+## v2.0.1
+_2023-07-17_
+
+ * React-Native entry in `package.json`
+
 ## v2.0.0
 _2023-02-13_
 
