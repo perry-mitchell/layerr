@@ -1,5 +1,10 @@
 # Layerr Changelog
 
+## v2.1.0
+_2024-04-18_
+
+ * Error assertion via `assertError`
+
 ## v2.0.1
 _2023-07-17_
 
