@@ -1,6 +1,6 @@
 {
   "name": "layerr",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Error wrapping utility for NodeJS and the browser",
   "exports": "./dist/index.js",
   "react-native": "./dist/index.js",
