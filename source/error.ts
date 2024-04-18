@@ -1,10 +1,10 @@
-export function assertError(err: Error) {
+export function assertError(err: unknown): asserts err is Error {
     if (!isError(err)) {
         throw new Error("Parameter was not an error");
     }
 }
 
-export function isError(err: Error): boolean {
+export function isError(err: unknown): boolean {
     return objectToString(err) === "[object Error]" || err instanceof Error;
 }
 
