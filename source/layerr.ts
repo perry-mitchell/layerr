@@ -1,4 +1,5 @@
 import { assertError, isError } from "./error.js";
+import { getGlobalName } from "./global.js";
 import { parseArguments } from "./tools.js";
 import { LayerrInfo, LayerrOptions } from "./types.js";
 
@@ -21,7 +22,7 @@ export class Layerr extends Error {
         if (options.name && typeof options.name === "string") {
             this.name = options.name;
         } else {
-            this.name = "Layerr";
+            this.name = getGlobalName();
         }
         if (options.cause) {
             Object.defineProperty(this, "_cause", { value: options.cause });

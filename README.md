@@ -1,4 +1,5 @@
 # Layerr
+
 > Errors, with.. layers..
 
 A NodeJS and Web `Error` wrapping utility, based heavily on [VError](https://github.com/joyent/node-verror), but without all the extras and dependencies on Node core utilities. Written in Typescript, compiled to JavaScript and suitable for bundling in the browser.
@@ -15,7 +16,7 @@ Install by running: `npm install layerr`.
 
 Use it as a regular error:
 
-```javascript
+```typescript
 const { Layerr } = require("layerr");
 
 throw new Layerr("Test error");
@@ -23,23 +24,26 @@ throw new Layerr("Test error");
 
 Or use it to wrap errors:
 
-```javascript
-doSomething().catch(err => {
+```typescript
+doSomething().catch((err) => {
     throw new Layerr(err, "Failed doing something");
 });
 ```
 
 Layerr's can have info attached:
 
-```javascript
+```typescript
 const { Layerr } = require("layerr");
 
 function somethingElse() {
-    throw new Layerr({
-        info: {
-            code: 123
-        }
-    }, "Problem");
+    throw new Layerr(
+        {
+            info: {
+                code: 123,
+            },
+        },
+        "Problem"
+    );
 }
 
 somethingElse().catch((err: Layerr) => {
@@ -47,3 +51,24 @@ somethingElse().catch((err: Layerr) => {
     // code === 123
 });
 ```
+
+### Global Name
+
+By default Layerr names all created errors as `Layerr`. You can change this name by calling `setGlobalName`, and revert it by passing `null` to this function:
+
+```typescript
+import { Layerr, setGlobalName } from "layerr";
+
+setGlobalName("CustomError");
+
+const err = new Layerr("My error");
+
+err.name; // "CustomError"
+
+throw err;
+// Uncaught Layerr [CustomError]: My error
+```
+
+## Support
+
+Layerr (v3) supports NodeJS 16 onwards. It should also support all major+current browsers, once compiled/bundled.
