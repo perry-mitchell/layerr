@@ -5,7 +5,12 @@ export function assertError(err: unknown): asserts err is Error {
 }
 
 export function isError(err: unknown): boolean {
-    return objectToString(err) === "[object Error]" || err instanceof Error;
+    return (
+        (!!err &&
+            typeof err === "object" &&
+            objectToString(err) === "[object Error]") ||
+        err instanceof Error
+    );
 }
 
 function objectToString(obj: Object): string {
