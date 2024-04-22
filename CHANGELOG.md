@@ -1,5 +1,12 @@
 # Layerr Changelog
 
+## v3.0.0
+_2024-04-22_
+
+ * Removed `Layerr#cause` due to typescript issues
+ * `setGlobalName` helper
+ * Strict mode types
+
 ## v2.1.0
 _2024-04-18_
 
