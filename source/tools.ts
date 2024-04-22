@@ -1,14 +1,17 @@
 import { isError } from "./error.js";
 import { LayerrOptions } from "./types.js";
 
-export function parseArguments(args: Array<any>): { options: LayerrOptions, shortMessage: string } {
+export function parseArguments(args: Array<any>): {
+    options: LayerrOptions;
+    shortMessage: string;
+} {
     let options: LayerrOptions,
         shortMessage = "";
     if (args.length === 0) {
         options = {};
     } else if (isError(args[0])) {
         options = {
-            cause: args[0]
+            cause: args[0],
         };
         shortMessage = args.slice(1).join(" ") || "";
     } else if (args[0] && typeof args[0] === "object") {
@@ -22,6 +25,6 @@ export function parseArguments(args: Array<any>): { options: LayerrOptions, shor
     }
     return {
         options,
-        shortMessage
+        shortMessage,
     };
 }
