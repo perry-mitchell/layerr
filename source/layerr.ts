@@ -6,7 +6,10 @@ export class Layerr extends Error {
     public _cause?: Error;
     public _info?: LayerrInfo;
 
-    constructor(errorOptionsOrMessage?: LayerrOptions | string | Error, messageText?: string) {
+    constructor(
+        errorOptionsOrMessage?: LayerrOptions | string | Error,
+        messageText?: string
+    ) {
         const args = [...arguments];
         const { options, shortMessage } = parseArguments(args);
         let message = shortMessage;
@@ -25,7 +28,7 @@ export class Layerr extends Error {
         }
         Object.defineProperty(this, "_info", { value: {} });
         if (options.info && typeof options.info === "object") {
-            Object.assign(this._info, options.info);
+            Object.assign(this._info as Record<string, any>, options.info);
         }
         if (Error.captureStackTrace) {
             const ctor = options.constructorOpt || this.constructor;
@@ -36,16 +39,18 @@ export class Layerr extends Error {
     static cause(err: Layerr | Error): Layerr | Error | null {
         assertError(err);
         if (!(err as Layerr)._cause) return null;
-        return isError((err as Layerr)._cause) ? (err as Layerr)._cause : null;
+        return isError((err as Layerr)._cause)
+            ? ((err as Layerr)._cause as Error)
+            : null;
     }
 
-    static fullStack(err: Layerr| Error): string {
+    static fullStack(err: Layerr | Error): string {
         assertError(err);
         const cause = Layerr.cause(err);
         if (cause) {
             return `${err.stack}\ncaused by: ${Layerr.fullStack(cause)}`;
         }
-        return err.stack;
+        return err.stack ?? "";
     }
 
     static info(err: Layerr | Error): LayerrInfo {
@@ -61,12 +66,11 @@ export class Layerr extends Error {
         return output;
     }
 
-    cause(): Error | Layerr | null {
-        return Layerr.cause(this);
-    }
-
     toString(): string {
-        let output = this.name || this.constructor.name || this.constructor.prototype.name;
+        let output =
+            this.name ||
+            this.constructor.name ||
+            this.constructor.prototype.name;
         if (this.message) {
             output = `${output}: ${this.message}`;
         }
