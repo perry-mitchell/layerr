@@ -1,6 +1,6 @@
 # Layerr
 
-> Errors, with.. layers..
+> Errors, with layers..
 
 [![NPM Downloads](https://img.shields.io/npm/dm/layerr)](https://www.npmjs.com/package/layerr)
 
