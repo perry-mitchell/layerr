@@ -6,6 +6,7 @@
   "react-native": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "module",
+  "sideEffects": false,
   "scripts": {
     "build": "run-s clean && tsc",
     "clean": "rimraf ./dist",
